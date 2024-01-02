@@ -1,6 +1,6 @@
-![Lax](https://user-images.githubusercontent.com/820696/63960091-a9232c00-ca5b-11e9-851b-9a3a12c15760.png)
+![Relay IRC](https://user-images.githubusercontent.com/820696/63960091-a9232c00-ca5b-11e9-851b-9a3a12c15760.png)
 
-![CI Status](https://github.com/brandly/Lax/workflows/.github/workflows/continuous-integration.yml/badge.svg)
+![CI Status](https://github.com/Alex313031/Relay-IRC/workflows/.github/workflows/continuous-integration.yml/badge.svg)
 
 - 🆓 **Free and Open-Source**
 - ✉️ **Multiple Connections**
@@ -12,7 +12,7 @@
 
 ## download
 
-[download apps for macOS and Windows here](https://github.com/brandly/Lax/releases)!
+[download apps for macOS and Windows here](https://github.com/Alex313031/Relay-IRC/releases)!
 
 for other platforms, you'll have to [build your own](#dist).
 

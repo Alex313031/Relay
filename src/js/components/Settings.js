@@ -20,7 +20,7 @@ class Settings extends React.Component<Props> {
       <div className="container settings">
         <h1>Settings</h1>
         <div className="input-group">
-          <label>Quit Message</label>
+          <label>Quit Message:</label>
           <input
             type="text"
             style={{ background: 'inherit' }}
@@ -42,10 +42,11 @@ class Settings extends React.Component<Props> {
             />
           </label>
         </div>
+        <hr />
         <p>
-          {pkg.name} v{pkg.version} ∙{' '}
+          {pkg.productName} v{pkg.version} <br />∙{' '}
           <a
-            href="https://github.com/brandly/Lax/issues/new"
+            href="https://github.com/Alex313031/Relay-IRC/issues/new"
             onClick={(e) => {
               e.preventDefault()
               shell.openExternal(e.target.href)

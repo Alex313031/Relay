@@ -1,10 +1,35 @@
+const { app, BrowserWindow, Menu, nativeTheme } = require('electron')
+const fs = require('fs')
 const path = require('path')
-const { app, BrowserWindow, Menu } = require('electron')
-const pkg = require('./package')
+const electronLog = require('electron-log')
+const contextMenu = require('electron-context-menu')
+const pkg = require('./package.json')
+const menu = require('./src/js/menu.js')
 
 try {
   require('electron-reloader')(module)
 } catch (err) {}
+
+// Initialize Electron remote module
+require('@electron/remote/main').initialize();
+
+// Restrict main.log size to 100Kb
+electronLog.transports.file.maxSize = 1024 * 100;
+
+// Get app version from package.json
+var appVersion = app.getVersion();
+const appName = app.getName();
+const userDataDir = app.getPath('userData');
+// Export Electron versions
+const electronVer = process.versions.electron;
+const chromeVer = process.versions.chrome;
+const nodeVer = process.versions.node;
+const v8Ver = process.versions.v8;
+
+// Globally export what OS we are on
+const isLinux = process.platform === 'linux';
+const isWin = process.platform === 'win32';
+const isMac = process.platform === 'darwin';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -12,25 +37,36 @@ let win
 
 function createWindow() {
   win = new BrowserWindow({
-    webPreferences: {
-      nodeIntegration: true
-    },
-    width: 1200,
+    title: 'Relay IRC',
+    width: 1024,
     height: 800,
     minHeight: 340,
-    minWidth: 680
+    minWidth: 680,
+    useContentSize: true,
+    icon: isWin ? path.join(__dirname, 'src/static/icon.ico') : path.join(__dirname, 'src/static/icon64.png'),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      experimentalFeatures: true,
+      webviewTag: true,
+      devTools: true,
+      enableRemoteModule: true,
+      preload: path.join(__dirname, 'src/static/client-preload.js')
+    },
+    autoHideMenuBar: false,
   })
+  require("@electron/remote/main").enable(win.webContents);
 
-  const iconPath = `${__dirname}/src/static/dock-icon.png`
-  if (process.platform === 'darwin') {
+  // const iconPath = `${__dirname}/src/static/dock-icon.png`
+  // if (process.platform === 'darwin') {
     // macOS
-    app.dock.setIcon(iconPath)
-  } else {
+    // app.dock.setIcon(iconPath)
+  // } else {
     // Windows, Linux, etc.
-    win.setIcon(iconPath)
-  }
+    // win.setIcon(iconPath)
+  // }
 
-  // and load the index.html of the app.
+  // And load the index.html of the app.
   win.loadURL(path.join(`file://${__dirname}`, `${pkg['main-html']}`))
 
   win.on('closed', () => {
@@ -51,52 +87,86 @@ function createWindow() {
       .then((name) => console.log(`Added Extension:  ${name}`))
       .catch((err) => console.log('An error occurred: ', err))
 
-    win.webContents.openDevTools()
+    win.webContents.openDevTools({ mode: 'detach' })
   }
 
-  const template = [
-    {
-      label: 'Application',
-      submenu: [
-        {
-          label: 'About Application',
-          selector: 'orderFrontStandardAboutPanel:'
-        },
-        { type: 'separator' },
-        {
-          label: 'Quit',
-          accelerator: 'Command+Q',
-          click: function () {
-            app.quit()
-          }
-        }
-      ]
-    },
-    {
-      label: 'Edit',
-      submenu: [
-        { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
-        { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
-        { type: 'separator' },
-        { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
-        { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
-        { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
-        {
-          label: 'Select All',
-          accelerator: 'CmdOrCtrl+A',
-          selector: 'selectAll:'
-        }
-      ]
-    }
-  ]
+  // Create The Menubar
+  Menu.setApplicationMenu(menu(app, win));
+  
+  // Dark mode
+  nativeTheme.themeSource = 'dark';
+}
 
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+contextMenu({
+  // Chromium context menu defaults
+  showSelectAll: true,
+  showCopyImage: true,
+  showCopyImageAddress: true,
+  showSaveImageAs: true,
+  showCopyVideoAddress: true,
+  showSaveVideoAs: true,
+  showCopyLink: true,
+  showSaveLinkAs: true,
+  showInspectElement: true,
+  showLookUpSelection: true,
+  showSearchWithGoogle: true,
+  prepend: (defaultActions, parameters) => [
+  { label: 'Open Video in New Window',
+    // Only show it when right-clicking video
+    visible: parameters.mediaType === 'video',
+    click: () => {
+      const newWin = new BrowserWindow({
+      title: 'New Window',
+      width: 1024,
+      height: 768,
+      useContentSize: true,
+      webPreferences: {
+        nodeIntegration: false,
+        experimentalFeatures: true,
+        devTools: true
+      }
+      });
+      const vidURL = parameters.srcURL;
+      newWin.loadURL(vidURL);
+    }
+  },
+  { label: 'Open Link in New Window',
+    // Only show it when right-clicking a link
+    visible: parameters.linkURL.trim().length > 0,
+    click: () => {
+      const newWin = new BrowserWindow({
+      title: 'New Window',
+      width: 1024,
+      height: 768,
+      useContentSize: true,
+      webPreferences: {
+        nodeIntegration: false,
+        experimentalFeatures: true,
+        devTools: true
+      }
+      });
+      const toURL = parameters.linkURL;
+      newWin.loadURL(toURL);
+    }
+  }]
+});
+
+// Force enable GPU acceleration
+app.commandLine.appendSwitch('ignore-gpu-blocklist');
+app.commandLine.appendSwitch('enable-quic');
+app.commandLine.appendSwitch('force-dark-mode');
+
+// Enable remote debugging only if we in development mode
+if (process.env.NODE_ENV === 'development') {
+  app.commandLine.appendSwitch('remote-debugging-port', '9222');
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.whenReady().then(async () => {
+  createWindow()
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

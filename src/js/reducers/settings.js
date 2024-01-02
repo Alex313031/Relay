@@ -1,12 +1,11 @@
 // @flow
 import { combineReducers } from 'redux'
-import { darkMode } from 'electron-util'
 import Persistor from '../modules/Persistor'
 import type { Action } from '../flow'
 
 const init = {
-  isDark: darkMode.isEnabled,
-  quitMessage: 'https://github.com/brandly/Lax'
+  isDark: true,
+  quitMessage: 'Bye'
 }
 
 function isDark(state: boolean = init.isDark, action: Action): boolean {

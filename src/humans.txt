@@ -1,0 +1,33 @@
+## relay-irc humans.txt ##
+
+# Copyright (c) 2024 Alex313031.
+# https://humanstxt.org/
+
+/* ABOUT */
+
+	Developer: Alexander Frick
+	Role: Main Developer
+	Twitter: @alex313031
+	GitHub: @Alex313031
+	Email: alex313031@gmail.com
+	Website: https://thorium.rocks/
+	From: Oklahoma, US
+
+	Developer: Matt Brandly
+	Role: Original Developer
+	GitHub: @brandly
+	Email: matt@brandly.me
+	Website: http://mattbrandly.com/about/
+	From: Boston, MA
+
+/* THANKS */
+
+	sindresorhus
+	electronjs
+
+/* WEBUI */
+
+	Last update: 2023/1/1
+	Language: English
+	Doctype: HTML5, CSS, JSON
+	IDE: Geany
