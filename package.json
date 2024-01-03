@@ -37,6 +37,7 @@
     "classnames": "2.5.1",
     "electron-context-menu": "3.6.1",
     "electron-log": "4.4.8",
+    "electron-store": "8.1.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-linkify": "0.2.2",
