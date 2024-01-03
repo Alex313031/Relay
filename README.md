@@ -1,6 +1,4 @@
-![Relay IRC](https://user-images.githubusercontent.com/820696/63960091-a9232c00-ca5b-11e9-851b-9a3a12c15760.png)
-
-![CI Status](https://github.com/Alex313031/Relay-IRC/workflows/.github/workflows/continuous-integration.yml/badge.svg)
+# Relay IRC
 
 - 🆓 **Free and Open-Source**
 - ✉️ **Multiple Connections**
@@ -10,32 +8,35 @@
 - 👔 **Clean Interface**
 - 😈 **Dark Mode**
 
-## download
+## Installation
 
-[download apps for macOS and Windows here](https://github.com/Alex313031/Relay-IRC/releases)!
+Download releases for Linux and Windows [here](https://github.com/Alex313031/Relay-IRC/releases)  
 
-for other platforms, you'll have to [build your own](#dist).
+For other platforms, you'll have to [build your own](#Building).
 
-## dev
+## Screenshot
+![Main Menu/UI](assets/screenshot.png)
+
+## Building
 
 ```shell
 $ npm install
-$ npm start
+$ npm run start
 ```
 
-to start this thing with react/redux devtools
+ - To start this thing with react/redux devtools:
 
 ```shell
 $ npm run dev
 ```
 
-to lint, check types, and run tests
+To lint, check types, and run tests:
 
 ```shell
-$ npm test
+$ npm run test
 ```
 
-while writing code, you might want to watch things
+While writing code, you might want to watch things:
 
 ```shell
 # run tests when code changes
@@ -45,10 +46,8 @@ $ npm run jest -- --watch
 $ npm run flow -- --watch
 ```
 
-## dist
-
-to build an executable for your OS
+To build an executable installer for your OS:
 
 ```shell
-$ npm run build
+$ npm run dist
 ```
