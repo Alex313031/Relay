@@ -70,14 +70,18 @@ function createWindow() {
 
   const windowDetails = store.get('windowDetails');
 
-  win.setSize(
-    windowDetails.size[0],
-    windowDetails.size[1]
-  );
-  win.setPosition(
-    windowDetails.position[0],
-    windowDetails.position[1]
-  );
+  if (windowDetails) {
+    win.setSize(
+      windowDetails.size[0],
+      windowDetails.size[1]
+    );
+    win.setPosition(
+      windowDetails.position[0],
+      windowDetails.position[1]
+    );
+  } else {
+    win.setSize(1024, 800);
+  }
 
   // const iconPath = `${__dirname}/static/dock-icon.png`
   // if (process.platform === 'darwin') {
