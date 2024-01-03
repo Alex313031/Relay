@@ -72,6 +72,11 @@ body {
 .input-group input[type='submit']:hover {
   border-color: #5294e2;
 }
+.input-group input:focus,
+.input-group select:focus,
+.input-group input[type='submit']:active {
+  filter: brightness(125%);
+}
 
 button,
 .input-group input[type='submit'] {

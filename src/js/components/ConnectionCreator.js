@@ -231,7 +231,7 @@ class Login extends React.Component<LoginProps, LoginState> {
               })
             }}
           />{' '}
-          remember credentials?
+          Remember Credentials?
         </label>
         <div className={inputGroupClass}>
           <input type="submit" disabled={disabled} value="Log In" />

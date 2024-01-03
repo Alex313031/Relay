@@ -10,6 +10,12 @@
     border-radius: 6px;
     color: #7c818c;
   }
+  .tab:hover {
+    filter: brightness(125%);
+  }
+  .tab:active {
+    filter: brightness(150%);
+  }
 
   .tab.selected {
     width: 50px;
@@ -26,7 +32,11 @@
     transition: opacity 180ms ease-out;
   }
   .tab.tab-settings-link:hover {
+    opacity: 0.9;
+  }
+  .tab.tab-settings-link:active {
     opacity: 1;
+    filter: brightness(150%);
   }
 
   .tab button {

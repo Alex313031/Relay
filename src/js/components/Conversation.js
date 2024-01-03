@@ -26,7 +26,7 @@ class Conversation extends React.PureComponent<Props, State> {
     super(props)
     this.state = {
       showPeopleList: true,
-      filterStatusUpdates: true
+      filterStatusUpdates: false
     }
   }
 

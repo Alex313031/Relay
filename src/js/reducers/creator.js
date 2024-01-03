@@ -4,7 +4,7 @@ import type { Action, CreatorState } from '../flow'
 const defaultCreds = {
   realName: '',
   nickname: '',
-  server: '',
+  server: 'irc.libera.chat',
   port: 6667,
   password: ''
 }

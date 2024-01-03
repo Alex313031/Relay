@@ -1,16 +1,16 @@
-# Relay IRC
+# Relay IRC <img src="https://github.com/Alex313031/Relay-IRC/blob/master/Logo.png" width="64">
 
 - 🆓 **Free and Open-Source**
 - ✉️ **Multiple Connections**
 - 🤔 **Remember Past Credentials**
 - 👋 **Automatically Join Channels After Connecting**
 - 🔔 **Desktop Notifications**
-- 👔 **Clean Interface**
+- 👔 **Clean, Minimalistic Interface**
 - 😈 **Dark Mode**
 
 ## Installation
 
-Download releases for Linux and Windows [here](https://github.com/Alex313031/Relay-IRC/releases)  
+Download releases for Linux and Windows [Here](https://github.com/Alex313031/Relay-IRC/releases)  
 
 For other platforms, you'll have to [build your own](#Building).
 
