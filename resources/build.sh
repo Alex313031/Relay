@@ -48,7 +48,7 @@ function main {
   printf "${GRE}Compiling JS with Babel...${c0}\n" &&
   printf "\n" &&
   cd src &&
-  NODE_ENV=production babel ./js --out-dir "../build/js" &&
+  NODE_ENV=production npx babel ./js --out-dir "../build/js" &&
   cd .. &&
 
   # CSS compilation

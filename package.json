@@ -24,8 +24,8 @@
     "runBuild": "./dist/linux-unpacked/relay-irc",
     "builderDir": "electron-builder --dir",
     "builderDist": "electron-builder",
-    "build": "./resources/build.sh --dir",
-    "dist": "./resources/build.sh --dist",
+    "build": "bash ./resources/build.sh --dir",
+    "dist": "bash ./resources/build.sh --dist",
     "clean": "rimraf ./build && rimraf ./dist && rimraf ./src/node_modules && rimraf ./node_modules",
     "distclean": "rimraf ./build && rimraf ./dist",
     "burn": "rimraf ./package-lock.json"
