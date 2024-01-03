@@ -28,9 +28,7 @@
     "dist": "./resources/build.sh --dist",
     "clean": "rimraf ./build && rimraf ./dist && rimraf ./src/node_modules && rimraf ./node_modules",
     "distclean": "rimraf ./build && rimraf ./dist",
-    "burn": "rimraf ./package-lock.json",
-    "preinstall": "node ./resources/preinstall.js",
-    "postinstall": "electron-builder install-app-deps"
+    "burn": "rimraf ./package-lock.json"
   },
   "dependencies": {
     "@electron/remote": "2.1.1",
