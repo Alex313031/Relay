@@ -29,7 +29,7 @@
     "clean": "rimraf ./build && rimraf ./dist && rimraf ./node_modules && rimraf ./src/node_modules",
     "distclean": "rimraf ./build && rimraf ./dist",
     "burn": "rimraf ./package-lock.json && rimraf ./src/package-lock.json",
-    "preinstall": "mkdir -p ./build && cp ./src/package.json ./build",
+    "preinstall": "node ./resources/preinstall.js",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
