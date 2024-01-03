@@ -1,28 +1,15 @@
 {
   "electronVersion": "22.3.27",
-  "electronDownload": {
-    "version": "22.3.27+wvcus",
-    "mirror": "https://github.com/castlabs/electron-releases/releases/download/v"
-  },
   "asar": true,
-  "productName": "Quark Player",
-  "appId": "com.alex313031.quark-player",
+  "productName": "Relay IRC",
+  "appId": "com.alex313031.relayirc",
   "generateUpdatesFilesForAllChannels": false,
   "directories": {
-      "app": "src",
-      "buildResources": "build",
+      "app": "build",
+      "buildResources": "resources",
       "output": "dist"
   },
   "files": [ "**/*" ],
-  "asarUnpack": [ "default-services.js" ],
-  "extraFiles": [
-    {
-      "from": "assets/icon64.png"
-    },
-    {
-      "from": "assets/README.txt"
-    }
-  ],
   "linux": {
     "target": [
       "zip",
@@ -31,15 +18,15 @@
     ],
     "maintainer": "Alex313031",
     "vendor": "Alex313031",
-    "synopsis": "Electron based Web Video Services Player. Supporting Netflix, Youtube, Twitch, Floatplane and More.",
-    "category": "Network;Browser;Media;AudioVideo;",
-    "executableName": "quark-player",
-    "artifactName": "quark-player_${version}_${arch}.${ext}",
+    "synopsis": "Minimalistic IRC client built with Electron & React.",
+    "category": "Network;Utility;",
+    "executableName": "relay-irc",
+    "artifactName": "relay-irc_${version}_${arch}.${ext}",
     "desktop": {
-      "Name": "Quark Player",
-      "StartupWMClass": "quark-player",
-      "Keywords": "electron;netflix;media;",
-      "Icon": "quark-player"
+      "Name": "Relay IRC",
+      "StartupWMClass": "relay-irc",
+      "Keywords": "irc;chat;",
+      "Icon": "relay-irc"
     }
   },
   "win": {
@@ -49,25 +36,25 @@
       "nsis"
     ],
     "publisherName": "Alex313031",
-    "executableName": "quark_player",
-    "artifactName": "quark_player_win64_${version}_${arch}.${ext}"
+    "executableName": "relay_irc",
+    "artifactName": "relay-irc_win64_${version}_${arch}.${ext}"
   },
   "nsis": {
-    "shortcutName": "Quark Player",
-    "artifactName": "quark_player_setup_${version}_${arch}.${ext}",
-    "uninstallDisplayName": "Quark Player ${version}",
-    "deleteAppDataOnUninstall": false,
+    "shortcutName": "Relay IRC",
+    "artifactName": "relay-irc_setup_${version}_${arch}.${ext}",
+    "uninstallDisplayName": "Relay IRC ${version}",
+    "deleteAppDataOnUninstall": true,
     "oneClick": false,
     "allowToChangeInstallationDirectory": true
   },
   "portable": {
-    "artifactName": "quark_player_portable_${version}_${arch}.${ext}"
+    "artifactName": "relay-irc_portable_${version}_${arch}.${ext}"
   },
   "mac": {
-    "category": "public.app-category.entertainment",
-    "icon": "build/icon.icns",
+    "category": "public.app-category.social-networking",
+    "icon": "resources/icon.icns",
     "darkModeSupport": true,
-    "artifactName": "quark_player_${version}_macos_${arch}.${ext}",
+    "artifactName": "relay-irc_${version}_macos_${arch}.${ext}",
     "target": [
       "dmg",
       "zip"

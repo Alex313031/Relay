@@ -12,25 +12,18 @@
   "bugs": {
     "url": "https://github.com/Alex313031/Relay-IRC/issues"
   },
-  "main": "src/index.js",
+  "main": "index.js",
+  "main-html": "index.html",
   "scripts": {
-    "start": "npm run sass && cd ./src && cross-env NODE_ENV=production electron ./",
-    "dev": "npm run sass && cd ./src && cross-env NODE_ENV=development electron ./",
-    "sass": "node-sass ./src/sass/app.scss --output ./src/static/",
-    "test": "npm run lint && npm run jest",
-    "lint": "eslint ./src/ ./test/",
+    "start": "npm run sass && cross-env NODE_ENV=production electron .",
+    "dev": "npm run sass && cross-env NODE_ENV=development electron .",
+    "sass": "node-sass sass/app.scss --output static/",
+    "test": "npm run lint",
+    "lint": "eslint ./ ../test/",
     "jest": "jest --verbose",
     "flow": "flow",
-    "runBuild": "./dist/linux-unpacked/relay-irc",
-    "builderDir": "electron-builder --dir",
-    "build": "./resources/build.sh",
-    "builderDist": "electron-builder",
-    "dist": "./resources/build.sh",
-    "clean": "rimraf ./dist && rimraf ./node_modules && rimraf ./src/node_modules",
-    "distclean": "rimraf ./build && rimraf ./dist",
-    "burn": "rimraf ./package-lock.json && rimraf ./src/package-lock.json",
-    "preinstall": "mkdir -p ./build && cp ./src/package.json ./build",
-    "postinstall": "electron-builder install-app-deps"
+    "clean": "rimraf node_modules",
+    "burn": "rimraf package-lock.json"
   },
   "dependencies": {
     "@electron/remote": "2.1.1",

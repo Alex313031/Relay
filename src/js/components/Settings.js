@@ -4,7 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { shell } from 'electron'
 import type { Dispatch, IrcState } from '../flow'
-import pkg from '../../../package.json'
+import pkg from '../../package.json'
 
 type Props = {
   dispatch: Dispatch,

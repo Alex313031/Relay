@@ -1,10 +1,8 @@
 const { app, BrowserWindow, Menu, nativeTheme } = require('electron')
-const fs = require('fs')
 const path = require('path')
 const electronLog = require('electron-log')
 const contextMenu = require('electron-context-menu')
-const pkg = require('./package.json')
-const menu = require('./src/js/menu.js')
+const menu = require('./menu.js')
 
 try {
   require('electron-reloader')(module)
@@ -16,20 +14,8 @@ require('@electron/remote/main').initialize();
 // Restrict main.log size to 100Kb
 electronLog.transports.file.maxSize = 1024 * 100;
 
-// Get app version from package.json
-var appVersion = app.getVersion();
-const appName = app.getName();
-const userDataDir = app.getPath('userData');
-// Export Electron versions
-const electronVer = process.versions.electron;
-const chromeVer = process.versions.chrome;
-const nodeVer = process.versions.node;
-const v8Ver = process.versions.v8;
-
-// Globally export what OS we are on
-const isLinux = process.platform === 'linux';
+// Are we on Windows?
 const isWin = process.platform === 'win32';
-const isMac = process.platform === 'darwin';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -43,7 +29,8 @@ function createWindow() {
     minHeight: 340,
     minWidth: 680,
     useContentSize: true,
-    icon: isWin ? path.join(__dirname, 'src/static/icon.ico') : path.join(__dirname, 'src/static/icon64.png'),
+    icon: isWin ? path.join(__dirname, 'static/icon.ico') : path.join(__dirname, 'static/icon64.png'),
+    autoHideMenuBar: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -51,13 +38,12 @@ function createWindow() {
       webviewTag: true,
       devTools: true,
       enableRemoteModule: true,
-      preload: path.join(__dirname, 'src/static/client-preload.js')
-    },
-    autoHideMenuBar: false,
+      preload: path.join(__dirname, 'static/client-preload.js')
+    }
   })
-  require("@electron/remote/main").enable(win.webContents);
+  require('@electron/remote/main').enable(win.webContents);
 
-  // const iconPath = `${__dirname}/src/static/dock-icon.png`
+  // const iconPath = `${__dirname}/static/dock-icon.png`
   // if (process.platform === 'darwin') {
     // macOS
     // app.dock.setIcon(iconPath)
@@ -67,7 +53,8 @@ function createWindow() {
   // }
 
   // And load the index.html of the app.
-  win.loadURL(path.join(`file://${__dirname}`, `${pkg['main-html']}`))
+  /* eslint-disable quotes */
+  win.loadURL(path.join(`file://${__dirname}`, `index.html`))
 
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -92,7 +79,7 @@ function createWindow() {
 
   // Create The Menubar
   Menu.setApplicationMenu(menu(app, win));
-  
+
   // Dark mode
   nativeTheme.themeSource = 'dark';
 }
@@ -111,7 +98,8 @@ contextMenu({
   showLookUpSelection: true,
   showSearchWithGoogle: true,
   prepend: (defaultActions, parameters) => [
-  { label: 'Open Video in New Window',
+  {
+    label: 'Open Video in New Window',
     // Only show it when right-clicking video
     visible: parameters.mediaType === 'video',
     click: () => {
@@ -130,7 +118,8 @@ contextMenu({
       newWin.loadURL(vidURL);
     }
   },
-  { label: 'Open Link in New Window',
+  {
+    label: 'Open Link in New Window',
     // Only show it when right-clicking a link
     visible: parameters.linkURL.trim().length > 0,
     click: () => {
@@ -155,6 +144,7 @@ contextMenu({
 app.commandLine.appendSwitch('ignore-gpu-blocklist');
 app.commandLine.appendSwitch('enable-quic');
 app.commandLine.appendSwitch('force-dark-mode');
+app.commandLine.appendSwitch('enable-local-file-accesses');
 
 // Enable remote debugging only if we in development mode
 if (process.env.NODE_ENV === 'development') {
