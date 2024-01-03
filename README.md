@@ -7,6 +7,7 @@
 - 🔔 **Desktop Notifications**
 - 👔 **Clean, Minimalistic Interface**
 - 😈 **Dark Mode**
+- 😸 **Built with my [custom AVX compiler optimized Electron](https://github.com/Alex313031/electron-22)**
 
 ## Installation
 

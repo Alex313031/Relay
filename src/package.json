@@ -12,18 +12,18 @@
   "bugs": {
     "url": "https://github.com/Alex313031/Relay-IRC/issues"
   },
-  "main": "index.js",
-  "main-html": "index.html",
+  "main": "./index.js",
+  "main-html": "./index.html",
   "scripts": {
-    "start": "npm run sass && cross-env NODE_ENV=production electron .",
-    "dev": "npm run sass && cross-env NODE_ENV=development electron .",
-    "sass": "node-sass sass/app.scss --output static/",
+    "start": "npm run sass && cross-env NODE_ENV=production electron ./",
+    "dev": "npm run sass && cross-env NODE_ENV=development electron ./",
+    "sass": "node-sass ./sass/app.scss --output ./static/",
     "test": "npm run lint",
     "lint": "eslint ./ ../test/",
     "jest": "jest --verbose",
     "flow": "flow",
-    "clean": "rimraf node_modules",
-    "burn": "rimraf package-lock.json"
+    "clean": "rimraf ./node_modules",
+    "burn": "rimraf ./package-lock.json"
   },
   "dependencies": {
     "@electron/remote": "2.1.1",
@@ -52,7 +52,7 @@
     "babel-jest": "28.1.3",
     "babel-plugin-transform-node-env-inline": "0.4.3",
     "cross-env": "7.0.3",
-    "electron": "22.3.7",
+    "electron": "git+https://github.com/Alex313031/electron-releases-22.git",
     "electron-builder": "23.6.0",
     "electron-devtools-installer": "3.2.0",
     "electron-reloader": "1.2.3",
@@ -71,6 +71,6 @@
     "rimraf": "3.0.2"
   },
   "resolutions": {
-    "electron": "22.3.27"
+    "electron": "git+https://github.com/Alex313031/electron-releases-22.git"
   }
 }

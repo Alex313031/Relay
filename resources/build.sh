@@ -30,8 +30,8 @@ esac
 
 PATH="$PATH:node_modules/.bin"
 appname="Relay IRC"
-build="build/"
-dist="dist/"
+build="build"
+dist="dist"
 
 function main {
   npx rimraf "$build" "$dist" &&
@@ -73,8 +73,10 @@ function create_app {
   npm run builderDir &&
   printf "\n" &&
   printf "${GRE}Done building $appname!\n" &&
+  printf "\n" &&
   printf "${YEL} - You will find the build in ./dist/*platform*-unpacked\n" &&
-  printf "${YEL}Where *platform* is the name of your OS.\n" &&
+  printf "${YEL}   Where *platform* is the name of your OS.\n" &&
+  printf "\n" &&
   tput sgr0
 }
 
@@ -84,7 +86,9 @@ function create_app_dist {
   npm run builderDist &&
   printf "\n" &&
   printf "${GRE}Done building $appname!\n" &&
-  printf "${YEL}You will find the installers in ./dist\n" &&
+  printf "\n" &&
+  printf "${YEL}You will find the installers in ./$dist\n" &&
+  printf "\n" &&
   tput sgr0
 }
 

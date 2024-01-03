@@ -8,7 +8,21 @@ const userDataDir = app.getPath('userData');
 const userLogFile = path.join(userDataDir, 'logs/main.log');
 
 module.exports = (app, win) => {
+  // Globally export what OS we are on
+  const isLinux = process.platform === 'linux';
+  const isWin = process.platform === 'win32';
   const isMac = process.platform === 'darwin';
+
+  let currentOS;
+  if (isLinux) {
+    currentOS = 'Linux';
+  } else if (isWin) {
+    currentOS = 'Windows';
+  } else if (isMac) {
+    currentOS = 'MacOS';
+  } else {
+    currentOS = 'BSD';
+  }
 
   return Menu.buildFromTemplate([
     {
@@ -241,7 +255,8 @@ module.exports = (app, win) => {
               'Electron : ' + electronVer,
               'Chromium : ' + chromeVer,
               'Node : ' + nodeVer,
-              'V8 : ' + v8Ver
+              'V8 : ' + v8Ver,
+              'OS : ' + currentOS
             ]
             dialog.showMessageBox({
               type: 'info',

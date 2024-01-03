@@ -1,5 +1,9 @@
 {
   "electronVersion": "22.3.27",
+  "electronDownload": {
+    "version": "22.3.27",
+    "mirror": "https://github.com/Alex313031/electron-22/releases/download/v"
+  },
   "asar": true,
   "productName": "Relay IRC",
   "appId": "com.alex313031.relayirc",

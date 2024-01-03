@@ -26,8 +26,21 @@ const chromeVer = process.versions.chrome;
 const nodeVer = process.versions.node;
 const v8Ver = process.versions.v8;
 
-// Are we on Windows?
+// Globally export what OS we are on
+const isLinux = process.platform === 'linux';
 const isWin = process.platform === 'win32';
+const isMac = process.platform === 'darwin';
+
+let currentOS;
+if (isLinux) {
+  currentOS = 'Linux';
+} else if (isWin) {
+  currentOS = 'Windows';
+} else if (isMac) {
+  currentOS = 'MacOS';
+} else {
+  currentOS = 'BSD';
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -204,7 +217,8 @@ app.whenReady().then(async() => {
     console.log(`  Electron Version: ` + electronVer);
     console.log(`  Chromium Version: ` + chromeVer);
     console.log(`  NodeJS Version: ` + nodeVer);
-    console.log(`  V8 Version: ` + v8Ver + '\n');
+    console.log(`  V8 Version: ` + v8Ver);
+    console.log(`  OS: ` + currentOS + '\n');
     app.quit();
   } else {
   console.log('\n');
