@@ -5,7 +5,7 @@ Thumbs.db
 dist/
 build/
 src/static/*.css
-
+/release/
 coverage/
 
 yarn.lock
