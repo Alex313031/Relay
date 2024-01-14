@@ -227,7 +227,13 @@ module.exports = (app, win) => {
           label: 'View Humans.txt',
           accelerator: 'CmdorCtrl+Alt+Shift+H',
           click() {
-            const humansWindow = new BrowserWindow({ width: 532, height: 600, useContentSize: true, title: 'humans.txt' });
+            const humansWindow = new BrowserWindow({
+              width: 532,
+              height: 600,
+              useContentSize: true,
+              autoHideMenuBar: true,
+              title: 'humans.txt'
+            });
             humansWindow.loadFile(path.join(__dirname, 'humans.txt'));
             electronLog.info('Opened humans.txt :)');
           }
@@ -236,7 +242,13 @@ module.exports = (app, win) => {
           label: 'View License',
           accelerator: 'CmdorCtrl+Alt+Shift+L',
           click() {
-            const licenseWindow = new BrowserWindow({ width: 532, height: 550, useContentSize: true, title: 'License' });
+            const licenseWindow = new BrowserWindow({
+              width: 532,
+              height: 550,
+              useContentSize: true,
+              autoHideMenuBar: true,
+              title: 'License'
+            });
             licenseWindow.loadFile(path.join(__dirname, 'static/license.md'));
             electronLog.info('Opened license.md');
           }
