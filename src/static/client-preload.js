@@ -1,5 +1,5 @@
 const remote = require('@electron/remote');
-const Os = require('os')
+const Os = require('os');
 
 // Globally export what OS we are on
 const isLinux = process.platform === 'linux';
