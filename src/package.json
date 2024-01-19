@@ -3,7 +3,7 @@
   "appName": "relay-irc",
   "productName": "Relay IRC",
   "applicationId": "com.alex313031.relayirc",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Minimalistic IRC client built with Electron & React.",
   "repository": "https://github.com/Alex313031/Relay-IRC.git",
   "author": "Alex313031 <alex313031@gmail.com>",

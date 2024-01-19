@@ -28,6 +28,7 @@
       "deb",
       "appimage"
     ],
+    "icon": "resources/icons",
     "maintainer": "Alex313031",
     "vendor": "Alex313031",
     "synopsis": "Minimalistic IRC client built with Electron & React.",
