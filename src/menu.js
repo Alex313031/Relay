@@ -261,8 +261,9 @@ module.exports = (app, win) => {
             const chromeVer = process.versions.chrome;
             const nodeVer = process.versions.node;
             const v8Ver = process.versions.v8;
+            const appVer = app.getVersion();
             const info = [
-              'Relay IRC v' + app.getVersion(),
+              'Relay IRC v' + appVer,
               '',
               'Electron : ' + electronVer,
               'Chromium : ' + chromeVer,

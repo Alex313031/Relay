@@ -3,7 +3,7 @@
   "appName": "relay-irc",
   "productName": "Relay IRC",
   "applicationId": "com.alex313031.relayirc",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Minimalistic IRC client built with Electron & React.",
   "repository": "https://github.com/Alex313031/Relay-IRC.git",
   "author": "Alex313031 <alex313031@gmail.com>",
@@ -31,10 +31,10 @@
     "burn": "rimraf ./package-lock.json"
   },
   "dependencies": {
-    "@electron/remote": "2.1.1",
+    "@electron/remote": "2.1.2",
     "classnames": "2.5.1",
     "electron-context-menu": "3.6.1",
-    "electron-log": "4.4.8",
+    "electron-log": "5.1.0",
     "electron-store": "8.1.0",
     "react": "16.14.0",
     "react-dom": "16.14.0",
