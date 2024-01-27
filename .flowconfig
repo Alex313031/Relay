@@ -4,6 +4,10 @@
 .*/node_modules/electron-packager/test/fixtures/prune-is-module/node_modules/module/not-module/package.json
 .*/node_modules/electron-packager/test/fixtures/prune-is-module/node_modules/module/package.json
 
+[untyped]
+.*/src/.*
+.*/test/.*
+
 [include]
 
 [libs]
