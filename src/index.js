@@ -17,10 +17,9 @@ require('@electron/remote/main').initialize();
 // Restrict main.log size to 100Kb
 electronLog.transports.file.maxSize = 1024 * 100;
 
-// Get app details from package.json
+// Get version info
 const appName = app.getName();
 const appVersion = app.getVersion();
-// Export Electron versions
 const electronVer = process.versions.electron;
 const chromeVer = process.versions.chrome;
 const nodeVer = process.versions.node;

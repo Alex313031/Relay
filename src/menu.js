@@ -225,7 +225,7 @@ module.exports = (app, win) => {
         { type: 'separator' },
         {
           label: 'View Humans.txt',
-          accelerator: 'CmdorCtrl+Alt+Shift+H',
+          accelerator: 'CmdorCtrl+Alt+H',
           click() {
             const humansWindow = new BrowserWindow({
               width: 532,
@@ -240,7 +240,7 @@ module.exports = (app, win) => {
         },
         {
           label: 'View License',
-          accelerator: 'CmdorCtrl+Alt+Shift+L',
+          accelerator: 'CmdorCtrl+Alt+L',
           click() {
             const licenseWindow = new BrowserWindow({
               width: 532,
@@ -255,7 +255,7 @@ module.exports = (app, win) => {
         },
         {
           label: 'About App',
-          accelerator: 'CmdorCtrl+Alt+Shift+A',
+          accelerator: 'CmdorCtrl+Alt+A',
           click() {
             const electronVer = process.versions.electron;
             const chromeVer = process.versions.chrome;
