@@ -6,7 +6,8 @@
   },
   "asar": true,
   "productName": "Relay IRC",
-  "appId": "com.alex313031.relayirc",
+  "appId": "com.alex313031.relay-irc",
+  "copyright": "Copyright © 2024 Alex313031",
   "generateUpdatesFilesForAllChannels": false,
   "directories": {
       "app": "build",
