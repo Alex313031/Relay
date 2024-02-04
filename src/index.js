@@ -248,7 +248,7 @@ app.commandLine.appendSwitch('enable-quic');
 app.commandLine.appendSwitch('force-dark-mode');
 app.commandLine.appendSwitch('enable-local-file-accesses');
 
-// Enable remote debugging only if we in development mode
+// Enable remote debugging only if we are in development mode
 if (process.env.NODE_ENV === 'development') {
   app.commandLine.appendSwitch('remote-debugging-port', '9222');
   electronLog.warn('Note: Remote debugging port 9222 open');
