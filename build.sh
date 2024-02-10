@@ -1,9 +1,8 @@
 #!/bin/bash
-set -e
 
-#set -u
+# Copyright (c) 2020 - 2024 Alex313031 and Matt Brandly.
 
-# Copyright (c) 2020 - 2023 Alex313031 and Matt Brandly.
+set -ue
 
 YEL='\033[1;33m' # Yellow
 CYA='\033[1;96m' # Cyan
@@ -18,47 +17,48 @@ yell() { echo "$0: $*" >&2; }
 die() { yell "$*"; exit 111; }
 try() { "$@" || die "${RED}Failed $*"; }
 
-# --help
-displayHelp () {
-	printf "\n" &&
+function displayHelp {
 	printf "${bold}${GRE}Script to build and distribute Relay IRC!${c0}\n" &&
+	printf "${bold}${YEL}Use the --build flag to build the code${c0}\n" &&
+	printf "${bold}${YEL}Use the --dir flag to make an unpacked distribution${c0}\n" &&
+	printf "${bold}${YEL}Use the --dist flag to make distribution packages${c0}\n" &&
+	printf "${bold}${YEL}Use the --help flag to show this help${c0}\n" &&
 	printf "\n"
 }
-case $1 in
-	--help) displayHelp; exit 0;;
-esac
 
-PATH="$PATH:node_modules/.bin"
+PATH="$PATH:./node_modules/.bin"
 appname="Relay IRC"
-build="build"
-dist="dist"
+build="./build"
+dist="./dist"
 
 function main {
-  npx rimraf "$build" "$dist" &&
+  printf "${GRE}Cleaning up old build...${c0}\n" &&
+  rimraf "$build" "$dist" &&
+  printf "${YEL}Removed $build/ & $dist/${c0}\n" &&
+  printf "\n" &&
+  printf "${GRE}Setting up directories in $build...${c0}\n" &&
 
   mkdir -p "$build/js" &&
   mkdir -p "$build/static" &&
 
   # Dependencies
-  printf "${GRE}Installing production dependencies into $build ...${c0}\n" &&
   cp -v src/package.json "$build" &&
 
   # JavaScript
   printf "\n" &&
   printf "${GRE}Compiling JS with Babel...${c0}\n" &&
-  printf "\n" &&
   cd src &&
-  NODE_ENV=production npx babel ./js --out-dir "../build/js" &&
+  NODE_ENV=production babel ./js --out-dir "../build/js" &&
   cd .. &&
 
   # CSS compilation
   printf "\n" &&
-  printf "${GRE}Compiling CSS with Saas...${c0}\n" &&
-  npm run sass -- --output-style compressed &&
+  printf "${GRE}Compiling CSS with Saas...${c0}" &&
+  NODE_ENV=production npm run sass -- --output-style compressed &&
 
   # Static files
   printf "\n" &&
-  printf "${GRE}Copying static files into $build ...${c0}\n" &&
+  printf "${GRE}Copying static files into $build...${c0}\n" &&
   cp -v src/static/* "$build/static" &&
   cp -v src/index.js "$build/index.js" &&
   cp -v src/menu.js "$build/menu.js" &&
@@ -69,12 +69,13 @@ function main {
 
 function create_app {
   mkdir -p "$dist" &&
-  # electron-builder --dir
-  npm run builderDir &&
+  printf "\n" &&
+  printf "${GRE}Building $appname with electron-builder\n" &&
+  electron-builder --config electron-builder.json --dir &&
   printf "\n" &&
   printf "${GRE}Done building $appname!\n" &&
   printf "\n" &&
-  printf "${YEL} - You will find the build in ./dist/*platform*-unpacked\n" &&
+  printf "${YEL} - You will find the build in $dist/*platform*-unpacked\n" &&
   printf "${YEL}   Where *platform* is the name of your OS.\n" &&
   printf "\n" &&
   tput sgr0
@@ -82,15 +83,24 @@ function create_app {
 
 function create_app_dist {
   mkdir -p "$dist" &&
-  # electron-builder
-  npm run builderDist &&
+  printf "\n" &&
+  printf "${GRE}Building distribution packages for $appname with electron-builder\n" &&
+  electron-builder --config electron-builder.json &&
   printf "\n" &&
   printf "${GRE}Done building $appname!\n" &&
   printf "\n" &&
-  printf "${YEL}You will find the installers in ./$dist\n" &&
+  printf "${YEL}You will find the installers in $dist\n" &&
   printf "\n" &&
   tput sgr0
 }
+
+case $1 in
+	--help) displayHelp; exit 0;;
+esac
+
+case $1 in
+	--build) main; exit 0;;
+esac
 
 case $1 in
 	--dir) main; create_app; exit 0;;
