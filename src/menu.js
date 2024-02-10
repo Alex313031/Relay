@@ -4,10 +4,11 @@ const electronLog = require('electron-log');
 const Os = require('os');
 // Export app info
 const appName = app.getName();
+const userHome = app.getPath('home');
 const appVersion = app.getVersion();
 const userDataDir = app.getPath('userData');
 const userLogFile = path.join(userDataDir, 'logs/main.log');
-const userMacLogFile = path.join('/Users/usuario/Library/Logs', appName, 'main.log');
+const userMacLogFile = path.join(userHome, appName, 'main.log');
 
 module.exports = (app, win) => {
   // Globally export what OS we are on
