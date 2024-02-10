@@ -7,7 +7,7 @@ const appName = app.getName();
 const appVersion = app.getVersion();
 const userDataDir = app.getPath('userData');
 const userLogFile = path.join(userDataDir, 'logs/main.log');
-const userMacLogFile = path.join('~/Library/Logs', appName, 'main.log';
+const userMacLogFile = path.join('~/Library/Logs', appName, 'main.log');
 
 module.exports = (app, win) => {
   // Globally export what OS we are on
