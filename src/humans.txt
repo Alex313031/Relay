@@ -27,7 +27,7 @@
 
 /* WEBUI */
 
-	Last update: 2024/02/04
+	Last update: 2024/02/10
 	Language: English
 	Doctype: HTML5, CSS, JSON
 	IDE: Geany

@@ -1,6 +1,7 @@
 const { app, BrowserWindow, dialog, Menu, shell } = require('electron');
 const path = require('path');
 const electronLog = require('electron-log');
+const Os = require('os');
 // Export app info
 const appName = app.getName();
 const appVersion = app.getVersion();
@@ -12,6 +13,7 @@ module.exports = (app, win) => {
   const isLinux = process.platform === 'linux';
   const isWin = process.platform === 'win32';
   const isMac = process.platform === 'darwin';
+  const archType = Os.arch();
 
   let currentOS;
   if (isLinux) {
@@ -269,7 +271,7 @@ module.exports = (app, win) => {
               'Chromium : ' + chromeVer,
               'Node : ' + nodeVer,
               'V8 : ' + v8Ver,
-              'OS : ' + currentOS
+              'OS : ' + currentOS + ' ' + archType
             ]
             dialog.showMessageBox({
               type: 'info',
