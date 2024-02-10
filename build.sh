@@ -70,7 +70,7 @@ function main {
 function create_app {
   mkdir -p "$dist" &&
   printf "\n" &&
-  printf "${GRE}Building $appname with electron-builder\n" &&
+  printf "${GRE}Building $appname with electron-builder${c0}\n" &&
   electron-builder --config electron-builder.json --dir &&
   printf "\n" &&
   printf "${GRE}Done building $appname!\n" &&
@@ -84,7 +84,7 @@ function create_app {
 function create_app_dist {
   mkdir -p "$dist" &&
   printf "\n" &&
-  printf "${GRE}Building distribution packages for $appname with electron-builder\n" &&
+  printf "${GRE}Building distribution packages for $appname with electron-builder${c0}\n" &&
   electron-builder --config electron-builder.json &&
   printf "\n" &&
   printf "${GRE}Done building $appname!\n" &&
