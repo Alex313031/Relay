@@ -7,6 +7,7 @@ const appName = app.getName();
 const appVersion = app.getVersion();
 const userDataDir = app.getPath('userData');
 const userLogFile = path.join(userDataDir, 'logs/main.log');
+const userMacLogFile = '~/Library/Logs/${appName}/main.log';
 
 module.exports = (app, win) => {
   // Globally export what OS we are on
@@ -140,9 +141,15 @@ module.exports = (app, win) => {
         {
           label: 'Open Log File',
           click() {
-            electronLog.info('Opening ' + [ userLogFile ]);
-            const logWindow = new BrowserWindow({ width: 600, height: 768, useContentSize: true, title: userLogFile });
-            logWindow.loadURL(path.join(`file://`, userLogFile));
+            if (isMac) {
+              electronLog.info('Opening ' + [ userMacLogFile ]);
+              const logWindow = new BrowserWindow({ width: 600, height: 768, useContentSize: true, title: userMacLogFile });
+              logWindow.loadFile(userMacLogFile);
+            } else {
+              electronLog.info('Opening ' + [ userLogFile ]);
+              const logWindow = new BrowserWindow({ width: 600, height: 768, useContentSize: true, title: userLogFile });
+              logWindow.loadFile(userLogFile);
+            }
           }
         },
         {
