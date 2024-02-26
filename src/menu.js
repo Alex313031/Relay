@@ -4,8 +4,12 @@ const electronLog = require('electron-log');
 const Os = require('os');
 // Export app info
 const appName = app.getName();
-const userHome = app.getPath('home');
 const appVersion = app.getVersion();
+const electronVer = process.versions.electron;
+const chromeVer = process.versions.chrome;
+const nodeVer = process.versions.node;
+const v8Ver = process.versions.v8;
+const userHome = app.getPath('home');
 const userDataDir = app.getPath('userData');
 const userLogFile = path.join(userDataDir, 'logs/main.log');
 const userMacLogFile = path.join(userHome, 'Library/Logs', appName, 'main.log');
@@ -267,13 +271,8 @@ module.exports = (app, win) => {
           label: 'About App',
           accelerator: 'CmdorCtrl+Alt+A',
           click() {
-            const electronVer = process.versions.electron;
-            const chromeVer = process.versions.chrome;
-            const nodeVer = process.versions.node;
-            const v8Ver = process.versions.v8;
-            const appVer = app.getVersion();
             const info = [
-              'Relay IRC v' + appVer,
+              appName + ' v' + appVersion,
               '',
               'Electron : ' + electronVer,
               'Chromium : ' + chromeVer,
@@ -283,7 +282,7 @@ module.exports = (app, win) => {
             ]
             dialog.showMessageBox({
               type: 'info',
-              title: 'About Relay IRC',
+              title: 'About ' + appName,
               message: info.join('\n'),
               buttons: [('Ok')]
             });
