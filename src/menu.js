@@ -40,7 +40,9 @@ module.exports = (app, win) => {
           label: 'Go Back',
           accelerator: 'Alt+Left',
           click(item, focusedWindow) {
-            if (focusedWindow) focusedWindow.webContents.goBack();
+            if (focusedWindow) {
+              focusedWindow.webContents.goBack();
+            }
             const currentURL = focusedWindow.webContents.getURL();
             electronLog.info('Navigated backward to ' + [ currentURL ]);
           }
@@ -49,7 +51,9 @@ module.exports = (app, win) => {
           label: 'Go Forward',
           accelerator: 'Alt+Right',
           click(item, focusedWindow) {
-            if (focusedWindow) focusedWindow.webContents.goForward();
+            if (focusedWindow) {
+              focusedWindow.webContents.goForward();
+            }
             const currentURL = focusedWindow.webContents.getURL();
             electronLog.info('Navigated forward to ' + [ currentURL ]);
           }
@@ -104,14 +108,18 @@ module.exports = (app, win) => {
           label: 'Reload',
           accelerator: 'CmdOrCtrl+R',
           click(item, focusedWindow) {
-            if (focusedWindow) focusedWindow.webContents.reload();
+            if (focusedWindow) {
+              focusedWindow.webContents.reload();
+            }
           }
         },
         {
           label: 'Force Reload',
           accelerator: 'CmdOrCtrl+Shift+R',
           click(item, focusedWindow) {
-            if (focusedWindow) focusedWindow.webContents.reloadIgnoringCache();
+            if (focusedWindow) {
+              focusedWindow.webContents.reloadIgnoringCache();
+            }
           }
         },
         {
@@ -132,6 +140,59 @@ module.exports = (app, win) => {
       ]
     },
     {
+      role: 'windowMenu',
+      submenu: [
+        {
+          label: 'Go Back',
+          accelerator: 'Alt+Left',
+          click(item, focusedWindow) {
+            if (focusedWindow) {
+              focusedWindow.webContents.goBack();
+            }
+            const currentURL = focusedWindow.webContents.getURL();
+            electronLog.info('Navigated backward to ' + [ currentURL ]);
+          }
+        },
+        {
+          label: 'Go Forward',
+          accelerator: 'Alt+Right',
+          click(item, focusedWindow) {
+            if (focusedWindow) {
+              focusedWindow.webContents.goForward();
+            }
+            const currentURL = focusedWindow.webContents.getURL();
+            electronLog.info('Navigated forward to ' + [ currentURL ]);
+          }
+        },
+        {
+          label: 'New Window',
+          accelerator: 'CmdorCtrl+N',
+          click() {
+            app.emit('new-window');
+          }
+        },
+        {
+          label: 'Minimize Window',
+          click(item, focusedWindow) {
+            if (focusedWindow) {
+              focusedWindow.minimize();
+            }
+            electronLog.info('Minimized a window');
+          }
+        },
+        {
+          label: 'Close Window',
+          accelerator: 'CmdorCtrl+W',
+          click(item, focusedWindow) {
+            if (focusedWindow) {
+              focusedWindow.close();
+            }
+            electronLog.info('Closed a window');
+          }
+        }
+      ]
+    },
+    {
       label: 'Developer',
       submenu: [
         {
@@ -140,7 +201,9 @@ module.exports = (app, win) => {
           visible: false,
           acceleratorWorksWhenHidden: true,
           click(item, focusedWindow) {
-            if (focusedWindow) focusedWindow.webContents.reload();
+            if (focusedWindow) {
+              focusedWindow.webContents.reload();
+            }
           }
         },
         {

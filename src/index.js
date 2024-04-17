@@ -41,11 +41,19 @@ if (isLinux) {
   currentOS = 'BSD';
 }
 
+// Use .ico on Windows, and a 64px or less .png on other OSes.
+let iconPath;
+if (isWin) {
+  iconPath = path.join(__dirname, 'static/icon.ico');
+} else {
+  iconPath = path.join(__dirname, 'static/icon64.png');
+}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win
+let win;
 
-function createWindow() {
+async function createWindow() {
   win = new BrowserWindow({
     title: 'Relay IRC',
     width: 1024,
@@ -53,7 +61,7 @@ function createWindow() {
     minHeight: 340,
     minWidth: 680,
     useContentSize: true,
-    icon: isWin ? path.join(__dirname, 'static/icon.ico') : path.join(__dirname, 'static/icon64.png'),
+    icon: iconPath,
     autoHideMenuBar: false,
     webPreferences: {
       nodeIntegration: true,
@@ -61,7 +69,6 @@ function createWindow() {
       experimentalFeatures: true,
       webviewTag: true,
       devTools: true,
-      enableRemoteModule: true,
       preload: path.join(__dirname, 'static/client-preload.js')
     }
   });
@@ -95,14 +102,14 @@ function createWindow() {
     win.setSize(1024, 800);
   }
 
-  // const iconPath = `${__dirname}/static/dock-icon.png`
-  // if (process.platform === 'darwin') {
+  //const dockIconPath = `${__dirname}/static/dock-icon.png`
+  //if (process.platform === 'darwin') {
     // macOS
-    // app.dock.setIcon(iconPath)
-  // } else {
+    //app.dock.setIcon(dockIconPath);
+  //} else {
     // Windows, Linux, etc.
-    // win.setIcon(iconPath)
-  // }
+    //win.setIcon(dockIconPath);
+  //}
 
   // And load the index.html of the app.
   /* eslint-disable quotes */
@@ -124,7 +131,7 @@ function createWindow() {
 
     installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
       .then((name) => electronLog.info(`Added Extension:  ${name}`))
-      .catch((err) => electronLog.warn('An error occurred: ', err))
+      .catch((err) => electronLog.warn('An error occurred: ', err));
 
     win.webContents.openDevTools({ mode: 'detach' });
   }
@@ -246,7 +253,7 @@ contextMenu({
 app.commandLine.appendSwitch('ignore-gpu-blocklist');
 app.commandLine.appendSwitch('enable-quic');
 app.commandLine.appendSwitch('force-dark-mode');
-app.commandLine.appendSwitch('enable-local-file-accesses');
+// app.commandLine.appendSwitch('enable-local-file-accesses');
 
 // Enable remote debugging only if we are in development mode
 if (process.env.NODE_ENV === 'development') {
@@ -268,19 +275,20 @@ app.whenReady().then(async() => {
     console.log(`  OS: ` + currentOS + '\n');
     app.quit();
   } else {
-  console.log('\n');
-  electronLog.info('Welcome to Relay IRC!');
-  createWindow();
+    console.log('\n');
+    electronLog.info('Welcome to Relay IRC!');
+    createWindow();
   }
 })
 
+// Create a second window
+app.on('new-window', () => {
+  electronLog.info('Secondary Windows not implemented yet.');
+});
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
 
 app.on('activate', () => {

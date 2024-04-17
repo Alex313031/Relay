@@ -1,4 +1,4 @@
-Convert all console.log to electronLog
 Add more logging
 Fix tab CSS
+Fix people/status menu button CSS
 Fix people/status menu not disappearing after click outside of box

@@ -1,6 +1,7 @@
 // @flow
 import net from 'net'
 import irc from 'slate-irc'
+const electronLog = require('electron-log');
 import { credentialsToId } from '../reducers/credentials'
 import equalNames from '../modules/equalNames'
 import type { Thunk, CredentialsT } from '../flow'
@@ -66,11 +67,11 @@ export const connectToServer = (
     })
 
     stream.on('mode', (e) => {
-      console.log('mode', e)
+      electronLog.info('Mode:', e)
     })
 
     stream.on('invite', (e) => {
-      console.log('invite', e)
+      electronLog.info('Invite:', e)
     })
 
     stream.on('notice', (e) => {
@@ -126,7 +127,7 @@ export const connectToServer = (
     })
 
     stream.on('kick', (e) => {
-      console.log('kick', e)
+      electronLog.info('Kick:', e)
     })
 
     stream.on('motd', (e) => {
@@ -232,7 +233,7 @@ function createIrcStream({ credentials, dispatch, getState, remember }) {
       })
     })
     .on('end', (e) => {
-      console.log('socket end', e)
+      electronLog.warn('Socket End:', e)
     })
     .on('connect', (e) => {
       const { connection } = getState().creator
@@ -252,14 +253,14 @@ function createIrcStream({ credentials, dispatch, getState, remember }) {
       // TODO: figure out how to recover
       // probably want to look at like window focus or "internet is back" events of some sort
       // then check for `ECONNRESET` errors and rebuild the stream(s)
-      console.log('socket close', e)
+      electronLog.info('Socket Close:', e)
       dispatch({
         type: CONNECTION_CLOSED,
         connectionId: id
       })
     })
     .on('error', (e) => {
-      console.log('socket error', e)
+      electronLog.error('Socket Error: ' + '[', e, ']')
       dispatch({
         type: 'REQUEST_CONNECTION_ERROR',
         connectionId: id,
