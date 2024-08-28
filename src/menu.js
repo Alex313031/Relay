@@ -306,7 +306,7 @@ module.exports = (app, win) => {
           click() {
             const humansWindow = new BrowserWindow({
               width: 532,
-              height: 600,
+              height: 532,
               useContentSize: true,
               autoHideMenuBar: true,
               title: 'humans.txt'
@@ -321,7 +321,7 @@ module.exports = (app, win) => {
           click() {
             const licenseWindow = new BrowserWindow({
               width: 532,
-              height: 550,
+              height: 500,
               useContentSize: true,
               autoHideMenuBar: true,
               title: 'License'
